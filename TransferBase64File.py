@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python
+
 import sys
 import base64
 import os
@@ -14,7 +15,7 @@ def transfor(inputFilePath):
             break;
         for line in lines:
            temp = base64.b64decode(line)
-           print(temp)
+           # print(temp)
            mylist.append(temp)
 
     return mylist
@@ -33,11 +34,14 @@ def write(filePath, lists):
 
 if __name__=='__main__':
     inputfilePath = raw_input("input file path:")
-    #lists =  transfor(sys.argv[1])
+    if inputfilePath=="":
+       sys.exit(0) 
     lists =  transfor(inputfilePath)
     print(len(lists))
     curPath = getCurrentFileDir()
     print("current dir: "+  curPath)
     outputname = raw_input("output filename: ")
+    if outputname == "":
+        sys.exit(0)
     outpath = curPath + "/" + outputname
     write(outpath, lists)
